@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Security; 
 
@@ -45,18 +46,12 @@ namespace json2xml
         }
         static void Main(string[] args)
         {
-            string json = @"
-                { 
-                    ""image1"": "".\\media\\logo_dark.png"",
-                    ""PurchaseOrderNumber"": 99503,
-                    ""OrderDate"": ""1999-10-20"",
-                    ""Shipping"": {
-                        ""Name"": ""Ellen Adams"",
-                        ""Street"": ""123 Maple Street""
-                    }
-                }
-            ";
-
+            string json = "";
+            
+            StreamReader sr = new StreamReader("data.json");
+            json = sr.ReadToEnd();
+            sr.Dispose();
+            
             string xml = json2xml(json);
           
             Console.Write(xml);

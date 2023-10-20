@@ -1,9 +1,9 @@
 { 
-    "image1": ".\media\logo_dark.png",
+    "image1": ".\\media\\logo_dark.png",
     "PurchaseOrderNumber": 99503,
     "OrderDate": "1999-10-20",
     "Shipping": {
         "Name": "Ellen Adams",
-        "Street"": "123 Maple Street"
+        "Street": "123 Maple Street"
     }
 }

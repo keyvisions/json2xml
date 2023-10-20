@@ -1,7 +1,5 @@
 # json2xml
-Plain text transformation of JSON text into XML text without the use of JSON nor XML libraries.
-
-For example:
+Plain text transformation of JSON text into XML text without the use of JSON nor XML libraries. As an example:
 
 ```json
 { 

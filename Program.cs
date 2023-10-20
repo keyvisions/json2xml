@@ -7,7 +7,6 @@ namespace json2xml
 {
     class Program
     {
-        // https://json.org/json-it.html
         private static string _json = "";
         private static string json2xml(string json, string name = "root")
         {

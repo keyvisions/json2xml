@@ -3,7 +3,7 @@ Plain text transformation of JSON text into XML text without the use of JSON nor
 
 For example:
 
-```JSON
+```json
 { 
     "image1": ".\\media\\logo_dark.png",
     "PurchaseOrderNumber": 99503,
@@ -16,7 +16,7 @@ For example:
 ```
 into
 
-```XML
+```xml
 <root>
   <image1>.\\media\\logo_dark.png</image1>
   <PurchaseOrderNumber>99503</PurchaseOrderNumber>
@@ -28,7 +28,9 @@ into
 </root>
 ```
 
-```C#
-string json = @"{""greet"":""Hello world""}";
-string xml = json2xml(json);
+```cs
+Console.Write(json2xml(@"{""greet"":""Hello world""}");
+
+Output:
+<root><greet>Hello world</greet></root>
 ```

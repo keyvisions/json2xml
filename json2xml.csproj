@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <Version>1.0.0</Version>
+    <Company>KeyVisions</Company>
+    <Authors>Giancarlo Trevisan</Authors>
+    <Product>json2xml</Product>
+    <Description>Given JSON text transform it into XML text</Description>
+    <Copyright>©2023</Copyright>
+  </PropertyGroup>
+</Project>

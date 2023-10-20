@@ -4,7 +4,17 @@ Plain text transformation of JSON text into XML text without the use of JSON nor
 For example:
 
 ```JSON
+{ 
+    "image1": ".\\media\\logo_dark.png",
+    "PurchaseOrderNumber": 99503,
+    "OrderDate": "1999-10-20",
+    "Shipping": {
+        "Name": "Ellen Adams",
+        "Street": "123 Maple Street"
+    }
+}
 ```
+into
 
 ```XML
 <root>
@@ -16,4 +26,9 @@ For example:
     <Street>123 Maple Street</Street>
   </Shipping>
 </root>
+```
+
+```C#
+string json = @"{""greet"":""Hello world""}";
+string xml = json2xml(json);
 ```

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Security; 
+using System.Security;
 
 namespace json2xml
 {
@@ -19,8 +19,7 @@ namespace json2xml
             {
                 if (name != "")
                     return String.Format("<{0}>{1}</{0}>", name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "");
-                else
-                    return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
+                return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
             }
 
             regex = new Regex(@"^\s*\[\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -29,8 +28,7 @@ namespace json2xml
             {
                 if (name != "")
                     return String.Format("<{0}>{1}</{0}>", name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "");
-                else
-                    return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
+                return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
             }
 
             regex = new Regex(@"^""(?<name>[a-z0-9_]+?)""\s*:\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -52,7 +50,8 @@ namespace json2xml
 
             regex = new Regex(@"^(?:[\]}]\s*,?\s*)(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             match = regex.Match(json);
-            if (match.Success) {
+            if (match.Success)
+            {
                 _json = match.Groups["rest"].Value;
                 return "";
             }
@@ -63,13 +62,13 @@ namespace json2xml
         static void Main(string[] args)
         {
             string json = "";
-            
+
             StreamReader sr = new StreamReader("data.json");
             json = sr.ReadToEnd();
             sr.Dispose();
-            
+
             string xml = json2xml(json);
-          
+
             Console.Write(xml);
         }
     }

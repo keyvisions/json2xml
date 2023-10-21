@@ -1,5 +1,5 @@
 # json2xml
-Vanilla transformation of JSON text into XML text without the use of JSON nor XML libraries. For example:
+Vanilla transformation of JSON text into XML text without the use of JSON nor XML libraries. For example, given
 
 ```json
 { 
@@ -15,7 +15,7 @@ Vanilla transformation of JSON text into XML text without the use of JSON nor XM
     ]
 }
 ```
-into
+generate this
 
 ```xml
 <root>
@@ -53,9 +53,13 @@ into
 </root>
 ```
 
-```cs
-Console.Write(json2xml(@"{""greet"":""Hello world""}");
+## Instructions
+Clone locally, publish and run
 
-Output:
-<root><greet>Hello world</greet></root>
-```
+usage: json2xml
+
+`$ git clone https://github.com/keyvisions/json2xml.git`
+
+`$ dotnet publish --configuration Release`
+
+`$ dotnet run`

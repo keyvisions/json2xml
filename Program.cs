@@ -57,7 +57,7 @@ namespace json2xml
                 return "";
             }
 
-            throw new SyntaxErrorException("Invalid JSON syntax");
+            throw new System.Data.SyntaxErrorException("Invalid JSON syntax");
         }
 
         static void Main(string[] args)

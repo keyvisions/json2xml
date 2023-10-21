@@ -10,15 +10,28 @@ namespace json2xml
         private static string _json = "";
         private static string json2xml(string json, string name = "root")
         {
+            if (json == "")
+                return "";
+
             Regex regex = new Regex(@"^\s*\{\s*""(?<name>[a-z0-9_]+?)""\s*:\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             Match match = regex.Match(json);
             if (match.Success)
-                return String.Format("<{0}>{1}</{0}>", name == "" ? "element" : name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "element");
+            {
+                if (name != "")
+                    return String.Format("<{0}>{1}</{0}>", name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "");
+                else
+                    return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
+            }
 
             regex = new Regex(@"^\s*\[\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             match = regex.Match(json);
             if (match.Success)
-                return String.Format("<{0}>{1}</{0}>", name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "element");
+            {
+                if (name != "")
+                    return String.Format("<{0}>{1}</{0}>", name, json2xml(match.Groups["rest"].Value, match.Groups["name"].Value)) + json2xml(_json, "");
+                else
+                    return json2xml(match.Groups["rest"].Value, match.Groups["name"].Value) + json2xml(_json, "");
+            }
 
             regex = new Regex(@"^""(?<name>[a-z0-9_]+?)""\s*:\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             match = regex.Match(json);
@@ -27,7 +40,8 @@ namespace json2xml
 
             regex = new Regex(@"^(?<value>true|false|null|-?(?:0|[1-9])[0-9]*(?:\.[0-9]+)?(?:e[\-+]?[0-9]+)?|""(?:\\""|.)*?"")\s*,?\s*(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             match = regex.Match(json);
-            if (match.Success) {
+            if (match.Success)
+            {
                 if (name == "" || name == "root")
                     name = "value";
                 string value = match.Groups["value"].Value.Trim('\"');
@@ -38,11 +52,14 @@ namespace json2xml
 
             regex = new Regex(@"^(?:[\]}]\s*,?\s*)(?<rest>[\s\S]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             match = regex.Match(json);
-            if (match.Success)
+            if (match.Success) {
                 _json = match.Groups["rest"].Value;
+                return "";
+            }
 
-            return "";
+            throw new SyntaxErrorException("Invalid JSON syntax");
         }
+
         static void Main(string[] args)
         {
             string json = "";

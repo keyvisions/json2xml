@@ -61,6 +61,8 @@ namespace json2xml
 
         static void Main(string[] args)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             string json = "";
 
             StreamReader sr = new StreamReader("data.json");
@@ -69,7 +71,13 @@ namespace json2xml
 
             string xml = json2xml(json);
 
-            Console.Write(xml);
+            using (StreamWriter outputFile = new StreamWriter("data.xml", false))
+            {
+                outputFile.WriteLine(xml);
+            }
+
+            watch.Stop();
+            Console.WriteLine($"Time: {watch.ElapsedMilliseconds} ms");
         }
     }
 }
